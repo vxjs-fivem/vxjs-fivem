@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "types": ["@types/jest", "@types/node"]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
