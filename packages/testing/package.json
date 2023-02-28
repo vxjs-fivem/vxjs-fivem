@@ -1,0 +1,23 @@
+{
+  "name": "@vxjs-fivem/testing",
+  "version": "1.0.0-b",
+  "repository": {
+    "url": "https://github.com/vxjs-fivem/vxjs-fivem"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": {
+    "name": "ivanzaida"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc"
+  },
+  "dependencies": {
+    "inversify": "^6.0.1",
+    "reflect-metadata": "^0.1.13",
+    "@vxjs-fivem/core": "1.0.0-beta-1"
+  },
+  "devDependencies": {
+    "@citizenfx/client": "^2.0.6290-1"
+  }
+}

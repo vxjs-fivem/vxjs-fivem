@@ -1,0 +1,8 @@
+export const NUI_PROVIDER = 'NUI_PROVIDER';
+export const KEY_PROVIDER = 'KEY_PROVIDER';
+export const RPC_PROVIDER = 'PRC_PROVIDER';
+export const PLATFORM_PROVIDER = 'PLATFORM_PROVIDER';
+
+export const ERROR_HANDLER = 'ERROR_HANDLER';
+
+export const ERROR_BOUNDARY = 'ERROR_BOUNDARY';

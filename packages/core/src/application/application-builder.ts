@@ -10,6 +10,8 @@ import {
   ProviderType,
 } from '../types';
 import { ServiceCollection } from '../container';
+import { Reflector } from '../metadata';
+import { CoreMetadata } from './const';
 
 const CONTROLLER_TAG = '00a54152-d339-490c-8122-ac4e73c513fb';
 const BINDER_TAG = '8e90de0d-6929-4b04-85ba-338d50d45605';
@@ -74,6 +76,10 @@ export class ApplicationBuilder implements IApplicationBuilder {
   }
 
   public addController<T>(controller: ProviderType<T>): IApplicationBuilder {
+    const constructor = Reflector.getClass(controller);
+    if (!Reflect.hasMetadata(CoreMetadata.Controller, constructor)) {
+      throw new Error(`Cannot register controller ${constructor.name}. Missing @Controller() decorator`);
+    }
     this._controllers.add(controller);
     return this;
   }
@@ -84,7 +90,7 @@ export class ApplicationBuilder implements IApplicationBuilder {
   }
 
   public build(): IApplication {
-    const [dynamicModules, asyncModules] = this.getModules();
+    const [ dynamicModules, asyncModules ] = this.getModules();
 
     dynamicModules.forEach((x) => {
       x.load(this);
@@ -119,6 +125,6 @@ export class ApplicationBuilder implements IApplicationBuilder {
       }
     });
 
-    return [dynamicModules, asyncModules];
+    return [ dynamicModules, asyncModules ];
   }
 }

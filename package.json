@@ -7,6 +7,12 @@
   "workspaces": [
     "./packages/**/*"
   ],
+  "scripts": {
+    "core": "yarn workspace @vxjs-fivem/core",
+    "core:publish": "yarn core build && npm publish ./packages/core --access public",
+    "client": "yarn workspace @vxjs-fivem/client",
+    "server": "yarn workspace @vxjs-fivem/server"
+  },
   "dependencies": {
     "reflect-metadata": "^0.1.13"
   },
