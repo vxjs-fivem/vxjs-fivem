@@ -1,10 +1,10 @@
 import { ChatCommand, Inject, InjectMany, Reflector } from '@vxjs-fivem/core';
-import { IPlatformProvider, PlatformProvider } from '../core';
+import { IPlatformProvider, PLATFORM_PROVIDER } from '../core';
 import { GuardedBinder } from './guarded-binder';
 import { GUARDS_TAG, IGuard } from '../guards';
 
 export class ChatCommandBinder extends GuardedBinder {
-  @Inject(PlatformProvider)
+  @Inject(PLATFORM_PROVIDER)
   private readonly provider: IPlatformProvider;
 
   public static typeTransformers = new Map<unknown, (v: string) => unknown>([

@@ -45,7 +45,7 @@ export class ClientModule implements IDynamicModule {
       .add<IKeyProvider>(KEY_PROVIDER, Reflect.construct(KeyProvider, []))
       .add<INuiProvider>(NUI_PROVIDER, Reflect.construct(NuiProvider, []))
       .add<IRpcProvider>(RPC_PROVIDER, Reflect.construct(RpcProvider, []))
-      .add<IErrorBoundary>(ERROR_BOUNDARY, Reflect.construct(ErrorBoundary, []))
+      .add<IErrorBoundary>(ERROR_BOUNDARY, ErrorBoundary as never)
       .add(NuiActiveGuard, new NuiActiveGuard(this.nuiActiveFieldName));
 
     this._errorHandlers.forEach((handler, type ) => {

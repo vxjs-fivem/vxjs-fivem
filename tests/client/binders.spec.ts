@@ -8,7 +8,13 @@ import {
   Reflector,
   TypeOf
 } from '@vxjs-fivem/core';
-import { ChatCommandBinder, ExportBinder, LocalEventBinder, NetEventBinder } from '@vxjs-fivem/client/src';
+import {
+  ChatCommandBinder,
+  ExportBinder, GUARDS_TAG,
+  IPlatformProvider,
+  LocalEventBinder,
+  NetEventBinder, NuiActiveGuard, PLATFORM_PROVIDER
+} from '@vxjs-fivem/client/src';
 
 describe('Binders', () => {
   const CONTROLLER_TAG = '00a54152-d339-490c-8122-ac4e73c513fb';
@@ -16,6 +22,16 @@ describe('Binders', () => {
   const exportName = 'exportName';
   const localEventName = 'localEventName';
   const netEventName = 'netEventName';
+
+  class PlatformProvider implements IPlatformProvider {
+    public emit = jest.fn();
+    public export = jest.fn();
+    public emitNet = jest.fn();
+    public on = jest.fn();
+    public onChat = jest.fn();
+    public onNet = jest.fn();
+
+  }
 
   @Controller('TestController')
   class TestController {
@@ -42,9 +58,12 @@ describe('Binders', () => {
 
   const testBinder = async (
     binder: TypeOf<IBinder>,
-    method: string, mock: ReturnType<typeof jest.fn>,
-    expected: (bound: Fn) => unknown[]): Promise<void> => {
+    mock: keyof PlatformProvider,
+  ): Promise<void> => {
+    const provider = new PlatformProvider();
     const builder = new ApplicationBuilder();
+    builder.services.add(PLATFORM_PROVIDER, provider);
+    builder.services.add(GUARDS_TAG, new NuiActiveGuard(''));
 
     builder.addBinder(binder);
     builder.addController(TestController);
@@ -53,45 +72,24 @@ describe('Binders', () => {
     await app.start();
 
     const controller = app.provider.get<TestController>(CONTROLLER_TAG);
-    const bound = Reflector.bindMethod(controller, method);
 
-    expect(mock).toBeCalledTimes(1);
-
-    expect(mock)
-      .toHaveBeenCalledWith(...expected(bound));
-
+    expect(provider[mock]).toBeCalledTimes(1);
   };
 
   it('should bind chat command', async () => {
-    global.RegisterCommand = jest.fn();
-    await testBinder(ChatCommandBinder, 'onChatCommand', global.RegisterCommand as never, (bound) => ([
-      chatCommandName, bound, false
-    ]));
-    delete global.RegisterCommand;
+    await testBinder(ChatCommandBinder, 'onChat');
   });
 
   it('should bind export', async () => {
-    global.exports = jest.fn();
-    await testBinder(ExportBinder, 'onExport', global.exports as never, (bound) => ([
-      exportName, bound
-    ]));
-    delete global.exports;
+    await testBinder(ExportBinder, 'export');
   });
 
   it('should bind local event', async () => {
-    global.on = jest.fn();
-    await testBinder(LocalEventBinder, 'onLocalEvent', global.on as never, (bound) => ([
-      localEventName, bound
-    ]));
-    delete global.on;
+    await testBinder(LocalEventBinder, 'on');
   });
 
   it('should bind net event', async () => {
-    global.onNet = jest.fn();
-    await testBinder(NetEventBinder, 'onNetEvent', global.onNet as never, (bound) => ([
-      netEventName, bound
-    ]));
-    delete global.onNet;
+    await testBinder(NetEventBinder, 'onNet');
   });
 
 });

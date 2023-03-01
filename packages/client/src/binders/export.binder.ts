@@ -1,8 +1,8 @@
 import { Export, IBinder, Inject, Reflector } from '@vxjs-fivem/core';
-import { IPlatformProvider, PlatformProvider } from '../core';
+import { IPlatformProvider, PLATFORM_PROVIDER } from '../core';
 
 export class ExportBinder implements IBinder {
-  @Inject(PlatformProvider)
+  @Inject(PLATFORM_PROVIDER)
   private readonly provider: IPlatformProvider;
 
   public bind(controller: unknown): void {

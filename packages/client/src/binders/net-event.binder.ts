@@ -1,8 +1,8 @@
 import { IBinder, Inject, NetEvent, Reflector } from '@vxjs-fivem/core';
-import { IPlatformProvider, PlatformProvider } from '../core';
+import { IPlatformProvider, PLATFORM_PROVIDER } from '../core';
 
 export class NetEventBinder implements IBinder {
-  @Inject(PlatformProvider)
+  @Inject(PLATFORM_PROVIDER)
   private readonly provider: IPlatformProvider;
   public bind(controller: unknown): void {
     const metadata = NetEvent.getMetadata(controller);

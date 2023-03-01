@@ -12,6 +12,9 @@ import {
 import { ServiceCollection } from '../container';
 import { Reflector } from '../metadata';
 import { CoreMetadata } from './const';
+import { CONFIG_SERVICE, IConfigService, ILogger, ILoggingFactory, LOGGER } from '../core';
+import { ConfigService } from './config.service';
+import { LoggingFactory } from './logging.factory';
 
 const CONTROLLER_TAG = '00a54152-d339-490c-8122-ac4e73c513fb';
 const BINDER_TAG = '8e90de0d-6929-4b04-85ba-338d50d45605';
@@ -53,7 +56,23 @@ export class ApplicationBuilder implements IApplicationBuilder {
   private readonly _modules: Set<IModule> = new Set<IModule>();
   private _controllers: Set<ProviderType<unknown>> = new Set<ProviderType<unknown>>();
   private _binders: Set<ProviderType<IBinder>> = new Set<ProviderType<IBinder>>();
-  public services = new ServiceCollection();
+  private _loggingFactory: ILoggingFactory;
+  public readonly config: IConfigService;
+  public readonly services = new ServiceCollection();
+
+  public constructor() {
+    const configFileName = `vx.config.${IsDuplicityVersion() ? 'server' : 'client'}.json`;
+    const resourceName = GetCurrentResourceName();
+    const content = JSON.parse(LoadResourceFile(resourceName, configFileName) ?? null) ?? {};
+    content.resourceName = resourceName;
+    this.config = new ConfigService(content);
+    this.services.add<IConfigService>(CONFIG_SERVICE, this.config);
+  }
+
+  public setLoggingFactory(factory: ILoggingFactory): IApplicationBuilder {
+    this._loggingFactory = factory;
+    return this;
+  }
 
   public removeModule(module: IModule): IApplicationBuilder {
     this._modules.delete(module);
@@ -94,6 +113,11 @@ export class ApplicationBuilder implements IApplicationBuilder {
 
     dynamicModules.forEach((x) => {
       x.load(this);
+    });
+
+    this._loggingFactory ??= new LoggingFactory();
+    this.services.addFactory<ILogger>(LOGGER, (provider, target) => {
+      return this._loggingFactory.createLogger(provider, target);
     });
 
     const provider = this.services.build();

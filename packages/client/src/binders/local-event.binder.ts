@@ -1,8 +1,8 @@
 import { IBinder, Inject, LocalEvent, Reflector } from '@vxjs-fivem/core';
-import { IPlatformProvider, PlatformProvider } from '../core';
+import { PLATFORM_PROVIDER, IPlatformProvider } from '../core';
 
 export class LocalEventBinder implements IBinder {
-  @Inject(PlatformProvider)
+  @Inject(PLATFORM_PROVIDER)
   private readonly provider: IPlatformProvider;
   public bind(controller: unknown): void {
     const metadata = LocalEvent.getMetadata(controller);
