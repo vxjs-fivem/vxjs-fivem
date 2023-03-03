@@ -16,6 +16,7 @@
     "npm:publish": "npm publish --access public"
   },
   "dependencies": {
+    "eventemitter2": "^6.4.9",
     "inversify": "^6.0.1",
     "lodash.get": "^4.4.2",
     "reflect-metadata": "^0.1.13"

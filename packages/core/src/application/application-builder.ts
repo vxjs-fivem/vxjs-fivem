@@ -12,9 +12,21 @@ import {
 import { ServiceCollection } from '../container';
 import { Reflector } from '../metadata';
 import { CoreMetadata } from './const';
-import { CONFIG_SERVICE, IConfigService, ILogger, ILoggingFactory, LOGGER } from '../core';
+import {
+  CONFIG_SERVICE,
+  IConfigService,
+  ILogger,
+  ILoggingFactory,
+  IPlatformProvider,
+  IResourceEventProvider,
+  LOGGER,
+  PLATFORM_PROVIDER,
+  RESOURCE_EVENT_PROVIDER,
+} from '../core';
 import { ConfigService } from './config.service';
 import { LoggingFactory } from './logging.factory';
+import EventEmitter2 from 'eventemitter2';
+import { ExportBinder, LocalEventBinder, ResourceEventBinder } from '../binders';
 
 const CONTROLLER_TAG = '00a54152-d339-490c-8122-ac4e73c513fb';
 const BINDER_TAG = '8e90de0d-6929-4b04-85ba-338d50d45605';
@@ -59,14 +71,23 @@ export class ApplicationBuilder implements IApplicationBuilder {
   private _loggingFactory: ILoggingFactory;
   public readonly config: IConfigService;
   public readonly services = new ServiceCollection();
+  public readonly side: 'CLIENT' | 'SERVER';
+  public readonly resourceName: string;
+  public readonly platformProvider: IPlatformProvider;
 
-  public constructor() {
-    const configFileName = `vx.config.${IsDuplicityVersion() ? 'server' : 'client'}.json`;
-    const resourceName = GetCurrentResourceName();
-    const content = JSON.parse(LoadResourceFile(resourceName, configFileName) ?? null) ?? {};
-    content.resourceName = resourceName;
+  public constructor(platformProvider: IPlatformProvider) {
+    this.side = IsDuplicityVersion() ? 'SERVER' : 'CLIENT';
+    const configFileName = `vx.config.${this.side.toLowerCase()}.json`;
+    this.resourceName = GetCurrentResourceName();
+    const content = JSON.parse(LoadResourceFile(this.resourceName, configFileName) ?? null) ?? {};
     this.config = new ConfigService(content);
     this.services.add<IConfigService>(CONFIG_SERVICE, this.config);
+    this.platformProvider = platformProvider;
+    this.services.add<IPlatformProvider>(PLATFORM_PROVIDER, this.platformProvider);
+    this.services.add<IResourceEventProvider>(RESOURCE_EVENT_PROVIDER, new EventEmitter2());
+    this.addBinder(LocalEventBinder);
+    this.addBinder(ExportBinder);
+    this.addBinder(ResourceEventBinder);
   }
 
   public setLoggingFactory(factory: ILoggingFactory): IApplicationBuilder {
@@ -109,7 +130,7 @@ export class ApplicationBuilder implements IApplicationBuilder {
   }
 
   public build(): IApplication {
-    const [ dynamicModules, asyncModules ] = this.getModules();
+    const [dynamicModules, asyncModules] = this.getModules();
 
     dynamicModules.forEach((x) => {
       x.load(this);
@@ -149,6 +170,6 @@ export class ApplicationBuilder implements IApplicationBuilder {
       }
     });
 
-    return [ dynamicModules, asyncModules ];
+    return [dynamicModules, asyncModules];
   }
 }
