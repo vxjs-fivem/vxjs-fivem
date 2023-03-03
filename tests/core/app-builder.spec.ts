@@ -1,19 +1,19 @@
 import {
-  ApplicationBuilder,
+  ApplicationBuilder, Controller,
   IApplicationBuilder,
   IAsyncModule,
   IBinder,
   IDynamicModule,
   Inject,
-  IServiceProvider,
-  sleep,
+  sleep
 } from '@vxjs-fivem/core/src';
 
 describe('App Builder', function () {
   it('should create an app', () => {
     const builder = new ApplicationBuilder();
     const app = builder.build();
-    expect(app).toBeDefined();
+    expect(app)
+      .toBeDefined();
   });
 
   it('should not start the app due to no controllers', async () => {
@@ -26,6 +26,8 @@ describe('App Builder', function () {
 
   it('should start the app with dynamic module', async () => {
     class ServiceClass {}
+
+    @Controller()
     class ControllerClass {
       @Inject(ServiceClass)
       public readonly service: ServiceClass;
@@ -45,20 +47,26 @@ describe('App Builder', function () {
 
     const builder = new ApplicationBuilder();
 
-    const app = builder.addModule(new Module()).build();
+    const app = builder.addModule(new Module())
+      .build();
 
     await app.start();
 
     const controllers = app.provider.getAll<ControllerClass>('00a54152-d339-490c-8122-ac4e73c513fb');
 
-    expect(binder.bind).toBeCalledTimes(1);
-    expect(controllers).toHaveLength(1);
-    expect(controllers[0]).toBeInstanceOf(ControllerClass);
-    expect(controllers[0].service).toBeInstanceOf(ServiceClass);
+    expect(binder.bind)
+      .toBeCalledTimes(1);
+    expect(controllers)
+      .toHaveLength(1);
+    expect(controllers[0])
+      .toBeInstanceOf(ControllerClass);
+    expect(controllers[0].service)
+      .toBeInstanceOf(ServiceClass);
   });
 
   it('should start the app with async module', async () => {
     class ServiceClass {}
+    @Controller()
     class ControllerClass {
       @Inject(ServiceClass)
       public readonly service: ServiceClass;
@@ -69,7 +77,7 @@ describe('App Builder', function () {
     })();
 
     class AsyncModule implements IAsyncModule {
-      public async loadAsync(builder: IApplicationBuilder, provider: IServiceProvider): Promise<void> {
+      public async loadAsync(builder: IApplicationBuilder): Promise<void> {
         builder.addController(ControllerClass);
         builder.services.add(ServiceClass, ServiceClass);
         builder.addBinder(binder);
@@ -79,15 +87,20 @@ describe('App Builder', function () {
 
     const builder = new ApplicationBuilder();
 
-    const app = builder.addModule(new AsyncModule()).build();
+    const app = builder.addModule(new AsyncModule())
+      .build();
 
     await app.start();
 
     const controllers = app.provider.getAll<ControllerClass>('00a54152-d339-490c-8122-ac4e73c513fb');
 
-    expect(binder.bind).toBeCalledTimes(1);
-    expect(controllers).toHaveLength(1);
-    expect(controllers[0]).toBeInstanceOf(ControllerClass);
-    expect(controllers[0].service).toBeInstanceOf(ServiceClass);
+    expect(binder.bind)
+      .toBeCalledTimes(1);
+    expect(controllers)
+      .toHaveLength(1);
+    expect(controllers[0])
+      .toBeInstanceOf(ControllerClass);
+    expect(controllers[0].service)
+      .toBeInstanceOf(ServiceClass);
   });
 });
