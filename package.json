@@ -5,8 +5,13 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "./packages/**/*"
+    "./packages/*"
   ],
+  "scripts": {
+    "core": "yarn workspace @vxjs-fivem/core",
+    "client": "yarn workspace @vxjs-fivem/client",
+    "server": "yarn workspace @vxjs-fivem/server"
+  },
   "dependencies": {
     "reflect-metadata": "^0.1.13"
   },
