@@ -1,19 +1,19 @@
 import { CoreMetadata, Inject, InjectMany, Reflector } from '@vxjs-fivem/core';
 import { NuiEvent } from '../decorators';
-import { NuiProvider } from '../providers';
 import { GuardedBinder } from './guarded-binder';
 import { GUARDS_TAG, IGuard } from '../guards';
+import { INuiProvider, NUI_PROVIDER } from '../core';
 
 export class NuiBinder extends GuardedBinder {
-  @Inject(NuiProvider)
-  private provider: NuiProvider;
+  @Inject(NUI_PROVIDER)
+  private provider: INuiProvider;
 
   public constructor(@InjectMany(GUARDS_TAG) guards: IGuard[]) {
     super(guards);
   }
 
   public bind(controller: unknown): void {
-    const controllerName = Reflect.getMetadata(Reflector.getClass(controller), CoreMetadata.Controller).name;
+    const controllerName = Reflect.getMetadata(CoreMetadata.Controller, Reflector.getClass(controller)).name;
     const metadata = NuiEvent.getMetadata(controller);
 
     metadata.forEach(({ method, value: { name } }) => {

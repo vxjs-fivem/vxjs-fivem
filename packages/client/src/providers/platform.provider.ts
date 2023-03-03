@@ -1,5 +1,5 @@
 import { Fn } from '@vxjs-fivem/core';
-import { IPlatformProvider } from '../core';
+import { ChatMessageOptions, IPlatformProvider } from '../core';
 
 export class FivemClientProvider implements IPlatformProvider {
   public on(event: string, handler: Fn): void {
@@ -22,7 +22,20 @@ export class FivemClientProvider implements IPlatformProvider {
     global.RegisterCommand(event, handler, isRestricted);
   }
 
-  public export(name: string, handler: Fn): void {
+  public emitChat(message: ChatMessageOptions): void {
+    emit('chat:addMessage', {
+      color: message.color ?? [ 255, 0, 0 ],
+      multiline: message.multiline ?? false,
+      args: [ message.emitter, message.message ]
+    });
+    
+  }
+
+  public onExport(name: string, handler: Fn): void {
     global.exports(name, handler);
+  }
+
+  public callExport<T = undefined>(resource: string, name: string, ...payload: unknown[]): T {
+    return global.exports[resource][name](...payload);
   }
 }

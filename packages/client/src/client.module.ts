@@ -8,7 +8,7 @@ import {
   NetEventBinder, NuiBinder, RemoteBinder
 } from './binders';
 import { FivemClientProvider, KeyProvider, NuiProvider, RpcProvider } from './providers';
-import { NuiActiveGuard } from './guards';
+import { GUARDS_TAG, NuiActiveGuard } from './guards';
 import {
   ERROR_HANDLER, IKeyProvider,
   INuiProvider,
@@ -46,7 +46,7 @@ export class ClientModule implements IDynamicModule {
       .add<INuiProvider>(NUI_PROVIDER, Reflect.construct(NuiProvider, []))
       .add<IRpcProvider>(RPC_PROVIDER, Reflect.construct(RpcProvider, []))
       .add<IErrorBoundary>(ERROR_BOUNDARY, ErrorBoundary as never)
-      .add(NuiActiveGuard, new NuiActiveGuard(this.nuiActiveFieldName));
+      .add(GUARDS_TAG, new NuiActiveGuard(this.nuiActiveFieldName));
 
     this._errorHandlers.forEach((handler, type ) => {
       if (!type) {

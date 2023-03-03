@@ -25,7 +25,7 @@ describe('Binders', () => {
 
   class PlatformProvider implements IPlatformProvider {
     public emit = jest.fn();
-    public export = jest.fn();
+    public onExport = jest.fn();
     public emitNet = jest.fn();
     public on = jest.fn();
     public onChat = jest.fn();
@@ -81,7 +81,7 @@ describe('Binders', () => {
   });
 
   it('should bind export', async () => {
-    await testBinder(ExportBinder, 'export');
+    await testBinder(ExportBinder, 'onExport');
   });
 
   it('should bind local event', async () => {

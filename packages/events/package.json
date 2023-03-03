@@ -1,5 +1,5 @@
 {
-  "name": "@vxjs-fivem/testing",
+  "name": "@vxjs-fivem/events",
   "version": "1.0.0-b",
   "repository": {
     "url": "https://github.com/vxjs-fivem/vxjs-fivem"
@@ -13,9 +13,10 @@
     "build": "rimraf dist && tsc"
   },
   "dependencies": {
+    "@vxjs-fivem/core": "1.0.0-beta-1",
+    "eventemitter2": "^6.4.9",
     "inversify": "^6.0.1",
-    "reflect-metadata": "^0.1.13",
-    "@vxjs-fivem/core": "1.0.0-beta-1"
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@citizenfx/client": "^2.0.6290-1"

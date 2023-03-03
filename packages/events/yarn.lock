@@ -7,6 +7,19 @@
   resolved "https://registry.yarnpkg.com/@citizenfx/client/-/client-2.0.6290-1.tgz#be14ab8f86d099e4026a34273c55b6098cd96450"
   integrity sha512-nmpovSza7dL4sKvdCO+XaEdFHhULkQP5HAjQwPxAJXjSX7ab9RO/RcGCk8YIhA4JAqXKmm3aEtUa9QhZ05x4og==
 
+"@vxjs-fivem/core@1.0.0-beta-1":
+  version "1.0.0-beta-1"
+  resolved "https://registry.yarnpkg.com/@vxjs-fivem/core/-/core-1.0.0-beta-1.tgz#c20ef262a384a5eafcd8c37cf43f9b7cd8f39148"
+  integrity sha512-RPzU60oyTE8ADRbbteXlr0rpcW16db/1UoLaPgdAflbbMdbRoUvez/lLOjD5cUbuu9uYF21Lfw516g4n5CC1Tw==
+  dependencies:
+    inversify "^6.0.1"
+    reflect-metadata "^0.1.13"
+
+eventemitter2@^6.4.9:
+  version "6.4.9"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.9.tgz#41f2750781b4230ed58827bc119d293471ecb125"
+  integrity sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==
+
 inversify@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/inversify/-/inversify-6.0.1.tgz#b20d35425d5d8c5cd156120237aad0008d969f02"

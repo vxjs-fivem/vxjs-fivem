@@ -10,7 +10,7 @@ export class ExportBinder implements IBinder {
 
     metadata.forEach(({ method, value }) => {
       const bound = Reflector.bindMethod(controller, method);
-      this.provider.export(value.name, bound);
+      this.provider.onExport(value.name, bound);
     });
   }
 }
