@@ -2,10 +2,19 @@
 # yarn lockfile v1
 
 
-eventemitter2@^6.4.9:
-  version "6.4.9"
-  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.9.tgz#41f2750781b4230ed58827bc119d293471ecb125"
-  integrity sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==
+"@citizenfx/server@^2.0.6302-1":
+  version "2.0.6302-1"
+  resolved "https://registry.yarnpkg.com/@citizenfx/server/-/server-2.0.6302-1.tgz#a091e967cc620ce0c0fbe27c15f771a49949ca5c"
+  integrity sha512-0A+kfaX6K8mXT9f1HWPS6Q4G5Xs/6BSQjK8wnW3RmtnfAfPqX+HNciKIbyH2boP0dlXFOsSPGEyRTbIC8CRoQA==
+
+"@vxjs-fivem/core@1.0.0-beta-2":
+  version "1.0.0-beta-2"
+  resolved "https://registry.yarnpkg.com/@vxjs-fivem/core/-/core-1.0.0-beta-2.tgz#f807b21ba05d10b71230426a47dd48f276e5c279"
+  integrity sha512-MuGW0wATPRnX6gu9ahNuSmE1UTiOWSIuupFyOZw+Ion3wBMNB8wwJvbpAbzu84YwY9wwEvQZkO0ru+plivIPbA==
+  dependencies:
+    inversify "^6.0.1"
+    lodash.get "^4.4.2"
+    reflect-metadata "^0.1.13"
 
 inversify@^6.0.1:
   version "6.0.1"

@@ -1,6 +1,6 @@
 {
-  "name": "@vxjs-fivem/core",
-  "version": "1.0.0-beta-5",
+  "name": "@vxjs-fivem/client",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,9 +16,10 @@
     "npm:publish": "npm publish --access public"
   },
   "dependencies": {
-    "eventemitter2": "^6.4.9",
-    "inversify": "^6.0.1",
-    "lodash.get": "^4.4.2",
     "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@citizenfx/client": "^2.0.6302-1",
+    "@vxjs-fivem/core": "1.0.0-beta-2"
   }
 }

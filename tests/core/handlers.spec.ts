@@ -1,7 +1,15 @@
-import { ApplicationBuilder, IBinder, NetEvent, LocalEvent } from '@vxjs-fivem/core/src';
+import { ApplicationBuilder, IBinder, NetEvent, LocalEvent, Controller, IPlatformProvider } from '@vxjs-fivem/core/src';
 
 describe('Handlers', function () {
+  class Provider implements IPlatformProvider {
+    public onChatCommand = jest.fn();
+    public onExport = jest.fn();
+    public onLocalEvent = jest.fn();
+    public onNetEvent = jest.fn();
+  }
+
   it('should bind net events', async function () {
+    @Controller()
     class ControllerClass {
       @NetEvent('netEvent')
       public netEvent(): void {
@@ -19,7 +27,7 @@ describe('Handlers', function () {
       }
     })();
 
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
 
     builder.addController(ControllerClass);
     builder.addBinder(binder);
@@ -30,6 +38,7 @@ describe('Handlers', function () {
   });
 
   it('should bind local events', async function () {
+    @Controller()
     class ControllerClass {
       @LocalEvent('localEvent')
       public localEvent(): void {
@@ -47,7 +56,7 @@ describe('Handlers', function () {
       }
     })();
 
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
 
     builder.addController(ControllerClass);
     builder.addBinder(binder);
@@ -58,6 +67,7 @@ describe('Handlers', function () {
   });
 
   it('should bind local and net events', async function () {
+    @Controller()
     class ControllerClass {
       @LocalEvent('localEvent')
       public localEvent(): void {
@@ -90,7 +100,7 @@ describe('Handlers', function () {
       }
     })();
 
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
 
     builder.addController(ControllerClass);
     builder.addBinder(localBinder);
@@ -102,6 +112,7 @@ describe('Handlers', function () {
   });
 
   it('should bind two same type events', async function () {
+    @Controller()
     class ControllerClass {
       @LocalEvent('localEvent1')
       public localEventMethod1(): void {
@@ -127,7 +138,7 @@ describe('Handlers', function () {
       }
     })();
 
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
 
     builder.addController(ControllerClass);
     builder.addBinder(binder);

@@ -299,6 +299,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@citizenfx/server@^2.0.6302-1":
+  version "2.0.6302-1"
+  resolved "https://registry.yarnpkg.com/@citizenfx/server/-/server-2.0.6302-1.tgz#a091e967cc620ce0c0fbe27c15f771a49949ca5c"
+  integrity sha512-0A+kfaX6K8mXT9f1HWPS6Q4G5Xs/6BSQjK8wnW3RmtnfAfPqX+HNciKIbyH2boP0dlXFOsSPGEyRTbIC8CRoQA==
+
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@cspotcode/source-map-support/-/source-map-support-0.8.1.tgz#00629c35a688e05a88b1cda684fb9d5e73f000a1"
@@ -848,6 +853,15 @@
   dependencies:
     "@typescript-eslint/types" "5.53.0"
     eslint-visitor-keys "^3.3.0"
+
+"@vxjs-fivem/core@1.0.0-beta-2":
+  version "1.0.0-beta-2"
+  resolved "https://registry.yarnpkg.com/@vxjs-fivem/core/-/core-1.0.0-beta-2.tgz#f807b21ba05d10b71230426a47dd48f276e5c279"
+  integrity sha512-MuGW0wATPRnX6gu9ahNuSmE1UTiOWSIuupFyOZw+Ion3wBMNB8wwJvbpAbzu84YwY9wwEvQZkO0ru+plivIPbA==
+  dependencies:
+    inversify "^6.0.1"
+    lodash.get "^4.4.2"
+    reflect-metadata "^0.1.13"
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
@@ -2570,6 +2584,11 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
+
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==
 
 lodash.memoize@4.x:
   version "4.1.2"

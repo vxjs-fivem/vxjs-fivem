@@ -1,23 +1,32 @@
 import {
   ApplicationBuilder,
+  Controller,
+  Fn,
   IApplicationBuilder,
   IAsyncModule,
   IBinder,
   IDynamicModule,
   Inject,
-  IServiceProvider,
+  IPlatformProvider,
   sleep,
 } from '@vxjs-fivem/core/src';
 
 describe('App Builder', function () {
+  class Provider implements IPlatformProvider {
+    public onChatCommand = jest.fn();
+    public onExport = jest.fn();
+    public onLocalEvent = jest.fn();
+    public onNetEvent = jest.fn();
+  }
+
   it('should create an app', () => {
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
     const app = builder.build();
     expect(app).toBeDefined();
   });
 
   it('should not start the app due to no controllers', async () => {
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
 
     const app = builder.build();
 
@@ -26,6 +35,8 @@ describe('App Builder', function () {
 
   it('should start the app with dynamic module', async () => {
     class ServiceClass {}
+
+    @Controller()
     class ControllerClass {
       @Inject(ServiceClass)
       public readonly service: ServiceClass;
@@ -40,10 +51,11 @@ describe('App Builder', function () {
         builder.addController(ControllerClass);
         builder.services.add(ServiceClass, ServiceClass);
         builder.addBinder(binder);
+        builder.addBinder(binder);
       }
     }
 
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
 
     const app = builder.addModule(new Module()).build();
 
@@ -59,6 +71,7 @@ describe('App Builder', function () {
 
   it('should start the app with async module', async () => {
     class ServiceClass {}
+    @Controller()
     class ControllerClass {
       @Inject(ServiceClass)
       public readonly service: ServiceClass;
@@ -69,7 +82,7 @@ describe('App Builder', function () {
     })();
 
     class AsyncModule implements IAsyncModule {
-      public async loadAsync(builder: IApplicationBuilder, provider: IServiceProvider): Promise<void> {
+      public async loadAsync(builder: IApplicationBuilder): Promise<void> {
         builder.addController(ControllerClass);
         builder.services.add(ServiceClass, ServiceClass);
         builder.addBinder(binder);
@@ -77,7 +90,7 @@ describe('App Builder', function () {
       }
     }
 
-    const builder = new ApplicationBuilder();
+    const builder = new ApplicationBuilder(new Provider());
 
     const app = builder.addModule(new AsyncModule()).build();
 
