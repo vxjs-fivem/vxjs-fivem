@@ -8,9 +8,7 @@ export const ChatCommand = createHandlerDecorator<
   { name: string; isRestricted: boolean }
 >('CHAT_COMMAND', (name, isRestricted = false) => ({ name, isRestricted }));
 
-export const RemoteRequest = createHandlerDecorator<[name: string], { name: string }>('REMOTE_REQUEST', (name) => ({
-  name,
-}));
+export const RemoteRequest = createHandlerDecorator<[], null>('REMOTE_REQUEST', () => null);
 export const ResourceEvent = createHandlerDecorator<[name: string], { name: string }>('RESOURCE_EVENT', (name) => ({
   name,
 }));

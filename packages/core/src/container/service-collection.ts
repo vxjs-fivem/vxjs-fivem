@@ -1,4 +1,4 @@
-import { IServiceCollection, IServiceProvider, Factory, ProviderType, TypeOf } from '../types';
+import { IServiceCollection, IServiceProvider, Factory, ProviderType, TypeOf, ContainerKeyType } from '../types';
 import { Container, decorate, injectable } from 'inversify';
 
 class ServiceProvider implements IServiceProvider {
@@ -8,15 +8,15 @@ class ServiceProvider implements IServiceProvider {
     this._container = container;
   }
 
-  public get<T>(key: string): T {
+  public get<T>(key: ContainerKeyType): T {
     return this.has(key) ? this._container.get<T>(key) : undefined;
   }
 
-  public getAll<T>(key: string): T[] {
+  public getAll<T>(key: ContainerKeyType): T[] {
     return this.has(key) ? this._container.getAll<T>(key) : [];
   }
 
-  public has(key: string): boolean {
+  public has(key: ContainerKeyType): boolean {
     return this._container.isBound(key);
   }
 }
@@ -30,7 +30,7 @@ export class ServiceCollection implements IServiceCollection {
 
   private _provider: IServiceProvider;
 
-  public add<T>(key: unknown, provider: ProviderType<T>): IServiceCollection {
+  public add<T>(key: ContainerKeyType, provider: ProviderType<T>): IServiceCollection {
     if (typeof provider === 'function') {
       // class
       this.tryDecorate(provider as TypeOf<T>);
@@ -45,7 +45,7 @@ export class ServiceCollection implements IServiceCollection {
     return this;
   }
 
-  public addFactory<T>(key: unknown, factory: Factory<T>): IServiceCollection {
+  public addFactory<T>(key: ContainerKeyType, factory: Factory<T>): IServiceCollection {
     this._container
       .bind(key as never)
       .toDynamicValue((ctx) => {
@@ -56,11 +56,11 @@ export class ServiceCollection implements IServiceCollection {
     return this;
   }
 
-  public has(key: string): boolean {
+  public has(key: ContainerKeyType): boolean {
     return this._container.isBound(key);
   }
 
-  public remove(key: string): IServiceCollection {
+  public remove(key: ContainerKeyType): IServiceCollection {
     this._container.unbind(key);
     return this;
   }

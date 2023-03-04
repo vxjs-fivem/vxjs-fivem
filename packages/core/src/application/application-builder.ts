@@ -80,6 +80,7 @@ export class ApplicationBuilder implements IApplicationBuilder {
     const configFileName = `vx.config.${this.side.toLowerCase()}.json`;
     this.resourceName = GetCurrentResourceName();
     const content = JSON.parse(LoadResourceFile(this.resourceName, configFileName) ?? null) ?? {};
+    content.resourceName = this.resourceName;
     this.config = new ConfigService(content);
     this.services.add<IConfigService>(CONFIG_SERVICE, this.config);
     this.platformProvider = platformProvider;

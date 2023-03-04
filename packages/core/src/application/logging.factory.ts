@@ -8,17 +8,20 @@ class Logger implements ILogger {
   }
 
   public debug(message: string): void {
+    console.log(`[DEBUG] ${message}`);
   }
 
   public error(error: Error, message?: string): void {
+    console.error(message, error);
   }
 
   public info(message: string): void {
+    console.log(`[INFO] ${message}`);
   }
 
   public log(message: string): void {
+    console.log(`[LOG] ${message}`);
   }
-
 }
 
 export class LoggingFactory implements ILoggingFactory {
