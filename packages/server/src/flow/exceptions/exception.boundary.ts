@@ -1,6 +1,6 @@
 import { NetContext, NetContextKind, TNetContextKind } from '../context';
 import { IExceptionBoundary } from './exception.boundary.interface';
-import { ILogger, Inject, InjectMany, LOGGER, Reflector, TypeOf } from '@vxjs-fivem/core';
+import { ILogger, Inject, InjectMany, LOGGER, Optional, Reflector, TypeOf } from '@vxjs-fivem/core';
 import { IExceptionFilter } from './exception.filter.interface';
 import { EXCEPTION_FILTER } from '../../core';
 
@@ -28,7 +28,7 @@ class DefaultExceptionFilter implements IExceptionFilter<Error> {
 export class ExceptionBoundary implements IExceptionBoundary {
   private readonly _handlers = new Map<TypeOf<Error>, IExceptionFilter<Error>>();
   private constructor(
-    @InjectMany(EXCEPTION_FILTER) handlers: IExceptionFilter<Error>[],
+    @Optional() @InjectMany(EXCEPTION_FILTER) handlers: IExceptionFilter<Error>[] = [],
     @Inject(LOGGER) private readonly _logger: ILogger
   ) {
     this._handlers.set(Error, new DefaultExceptionFilter(_logger));

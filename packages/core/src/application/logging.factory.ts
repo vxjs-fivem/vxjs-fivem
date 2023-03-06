@@ -1,5 +1,6 @@
 import { IConfigService, ILogger, ILoggingFactory } from '../core';
 import { IServiceProvider, TypeOf } from '../types';
+import * as console from 'console';
 
 class Logger implements ILogger {
   private readonly _context: string;
@@ -12,7 +13,11 @@ class Logger implements ILogger {
   }
 
   public error(error: Error, message?: string): void {
-    console.error(message, error);
+    if (message) {
+      console.error(message, error);
+    } else {
+      console.error(error);
+    }
   }
 
   public info(message: string): void {

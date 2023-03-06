@@ -1,9 +1,9 @@
-import { IApplicationBuilder, IDynamicModule, ProviderType } from '@vxjs-fivem/core';
+import { IApplicationBuilder, IDynamicModule, ProviderType, TypeOf } from '@vxjs-fivem/core';
 import { ChatCommandBinder, NetEventBinder, RemoteRequestBinder } from './binders';
 import { EXCEPTION_BOUNDARY, EXCEPTION_FILTER, GUARD_PROVIDER } from './core';
 import { ExceptionBoundary } from './flow/exceptions/exception.boundary';
-import { IExceptionBoundary, IGuard } from './flow';
-import { IExceptionFilter } from './flow/exceptions/exception.filter.interface';
+import { IExceptionBoundary, IGuard, IExceptionFilter } from './flow';
+import { LoggerFactory } from './providers';
 
 export class ServerModule implements IDynamicModule {
   private readonly _guards: ProviderType<IGuard>[] = [];
@@ -13,8 +13,10 @@ export class ServerModule implements IDynamicModule {
     builder.addBinder(ChatCommandBinder);
     builder.addBinder(NetEventBinder);
     builder.addBinder(RemoteRequestBinder);
-    [...new Set(this._guards)].forEach((x) => builder.services.add(GUARD_PROVIDER, x));
-    [...new Set(this._exceptionFilters)].forEach((x) => builder.services.add(EXCEPTION_FILTER, x));
+    [ ...new Set(this._guards) ].forEach((x) => builder.services.add(GUARD_PROVIDER, x));
+    [ ...new Set(this._exceptionFilters) ].forEach((x) => builder.services.add(EXCEPTION_FILTER, x));
+    
+    builder.setLoggingFactory(new LoggerFactory());
   }
 
   public addGuard(guard: ProviderType<IGuard>): this {
