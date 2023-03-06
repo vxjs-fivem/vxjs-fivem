@@ -1,3 +1,3 @@
 export class PlayerPart {
-  constructor(protected readonly source: string) {}
+  public constructor(protected readonly source: string) {}
 }

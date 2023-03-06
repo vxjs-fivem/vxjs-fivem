@@ -1,5 +1,4 @@
-import { Ped } from '../../entity';
-import { Vehicle } from '../../entity';
+import { Ped, Vehicle } from '../../entity';
 import { Vector3 } from '../../utils';
 import {
   VehicleEnteringFlag,
@@ -9,7 +8,7 @@ import {
 import { Entity } from '../../entity/entity';
 
 export class PedTask {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public clearSecondary(): void {
     ClearPedSecondaryTask(this.handle);

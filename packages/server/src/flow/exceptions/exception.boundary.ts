@@ -13,14 +13,14 @@ class DefaultExceptionFilter implements IExceptionFilter<Error> {
 
   private getType(type: TNetContextKind): string {
     switch (type) {
-      case NetContextKind.NetEvent:
-        return 'network event';
-      case NetContextKind.ChatCommand:
-        return 'chat command';
-      case NetContextKind.RemoteRequest:
-        return 'remote request';
-      default:
-        return type.toString();
+    case NetContextKind.NetEvent:
+      return 'network event';
+    case NetContextKind.ChatCommand:
+      return 'chat command';
+    case NetContextKind.RemoteRequest:
+      return 'remote request';
+    default:
+      return type.toString();
     }
   }
 }
@@ -34,6 +34,11 @@ export class ExceptionBoundary implements IExceptionBoundary {
     this._handlers.set(Error, new DefaultExceptionFilter(_logger));
     handlers.forEach((x) => {
       const type = Reflect.getMetadata('CATCHES', Reflector.getClass(x));
+      if (!type) {
+        // eslint-disable-next-line max-len
+        throw new Error(`Cannot register ${Reflector.getClass(x).name} as an exception filter. Missing @Catches() decorator`);
+      }
+
       this._handlers.set(type, x);
     });
   }

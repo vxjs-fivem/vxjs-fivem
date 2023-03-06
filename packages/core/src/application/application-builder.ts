@@ -131,7 +131,7 @@ export class ApplicationBuilder implements IApplicationBuilder {
   }
 
   public build(): IApplication {
-    const [dynamicModules, asyncModules] = this.getModules();
+    const [ dynamicModules, asyncModules ] = this.getModules();
 
     dynamicModules.forEach((x) => {
       x.load(this);
@@ -171,6 +171,6 @@ export class ApplicationBuilder implements IApplicationBuilder {
       }
     });
 
-    return [dynamicModules, asyncModules];
+    return [ dynamicModules, asyncModules ];
   }
 }

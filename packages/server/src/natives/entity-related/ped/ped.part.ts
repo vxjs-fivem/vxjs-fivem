@@ -1,3 +1,3 @@
 export class PedPart {
-  constructor(protected readonly handle: number) {}
+  public constructor(protected readonly handle: number) {}
 }

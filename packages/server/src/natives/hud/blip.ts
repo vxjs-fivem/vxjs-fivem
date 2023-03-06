@@ -25,7 +25,7 @@ const getAddOverload = (args: unknown[]): number => {
 };
 
 export class Blip {
-  constructor(public readonly handle: number) {}
+  public constructor(public readonly handle: number) {}
 
   public add(pos: Vector3): Blip;
   public add(entity: Entity): Blip;

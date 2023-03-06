@@ -1,5 +1,5 @@
 export class PlayerWeapon {
-  constructor(private readonly source: string) {}
+  public constructor(private readonly source: string) {}
 
   public get meleeDamageModifier(): number {
     return GetPlayerMeleeWeaponDamageModifier(this.source);

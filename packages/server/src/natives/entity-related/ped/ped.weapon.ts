@@ -1,5 +1,5 @@
 export class PedWeapon {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get selected(): number {
     return GetSelectedPedWeapon(this.handle);

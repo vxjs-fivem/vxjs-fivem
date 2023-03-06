@@ -7,7 +7,7 @@ export class PlayerIdentifiers {
 
   public constructor(source: string) {
     getPlayerIdentifiers(source).forEach((el) => {
-      const [key, value] = el.split(':');
+      const [ key, value ] = el.split(':');
       if (key in this) {
         this[key] = value;
       }

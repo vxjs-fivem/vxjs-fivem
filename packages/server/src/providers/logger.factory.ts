@@ -29,11 +29,11 @@ class ConsoleLogger implements ILogger {
   }
 
   public info(message: string): void {
-    this.write(Colors.FgBlue, 'INFO', message);
+    this.write(Colors.FgBlue, 'INFO ', message);
   }
 
   public log(message: string): void {
-    this.write(Colors.FgGreen, 'LOG', message);
+    this.write(Colors.FgGreen, 'LOG  ', message);
   }
 
   private write(color: Colors, prefix: string, message: string): void {

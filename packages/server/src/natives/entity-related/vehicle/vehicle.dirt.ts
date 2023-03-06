@@ -1,5 +1,5 @@
 export class VehicleDirt {
-  constructor(public readonly handle: number) {}
+  public constructor(public readonly handle: number) {}
 
   public get level(): number {
     return GetVehicleDirtLevel(this.handle);

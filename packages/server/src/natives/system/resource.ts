@@ -1,5 +1,5 @@
 export class Resource {
-  constructor(public readonly name: string) {}
+  public constructor(public readonly name: string) {}
 
   public getAmountOfMetadata(key: string): number {
     return GetNumResourceMetadata(this.name, key);

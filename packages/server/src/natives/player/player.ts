@@ -58,9 +58,10 @@ export class Player {
   // GetAirDragMultiplierForPlayersVehicle
 
   public get tokens(): string[] {
-    return new Array(GetNumPlayerTokens(this.source)).fill(0).map((el, i) => {
-      return GetPlayerToken(this.source, i);
-    });
+    return new Array(GetNumPlayerTokens(this.source)).fill(0)
+      .map((el, i) => {
+        return GetPlayerToken(this.source, i);
+      });
   }
 
   public get endpoint(): string {

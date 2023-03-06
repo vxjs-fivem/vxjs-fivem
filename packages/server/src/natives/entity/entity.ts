@@ -11,7 +11,7 @@ export abstract class Entity {
   }
 
   public get position(): Vector3 {
-    const [x, y, z] = GetEntityCoords(this.handle);
+    const [ x, y, z ] = GetEntityCoords(this.handle);
     return new Vector3(x, y, z);
   }
 
@@ -28,7 +28,7 @@ export abstract class Entity {
   }
 
   public get rotation(): Vector3 {
-    const [x, y, z] = GetEntityRotation(this.handle);
+    const [ x, y, z ] = GetEntityRotation(this.handle);
     return new Vector3(x, y, z);
   }
 
@@ -112,7 +112,7 @@ export abstract class Entity {
   }
 
   public get rotationVelocity(): Vector3 {
-    const [x, y, z] = GetEntityRotationVelocity(this.handle);
+    const [ x, y, z ] = GetEntityRotationVelocity(this.handle);
     return new Vector3(x, y, z);
   }
 
@@ -139,14 +139,14 @@ export abstract class Entity {
   public static byType(ent: number): Entity {
     if (ent) {
       switch (GetEntityType(ent)) {
-        case 0:
-          return null;
-        case 1:
-          return new Ped(ent);
-        case 2:
-          return new Vehicle(ent);
-        case 3:
-          return new Prop(ent);
+      case 0:
+        return null;
+      case 1:
+        return new Ped(ent);
+      case 2:
+        return new Vehicle(ent);
+      case 3:
+        return new Prop(ent);
       }
     }
   }

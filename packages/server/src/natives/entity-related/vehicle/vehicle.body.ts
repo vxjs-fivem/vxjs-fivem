@@ -1,5 +1,5 @@
 export class VehicleBody {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get health(): number {
     return GetVehicleBodyHealth(this.handle);

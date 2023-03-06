@@ -1,5 +1,5 @@
 export class PedClothing {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public setComponentVariation(
     componentId: number,

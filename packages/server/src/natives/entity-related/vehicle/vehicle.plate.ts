@@ -1,5 +1,5 @@
 export class VehiclePlate {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get text(): string {
     return GetVehicleNumberPlateText(this.handle);

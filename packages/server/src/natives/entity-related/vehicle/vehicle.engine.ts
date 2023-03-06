@@ -1,5 +1,5 @@
 export class VehicleEngine {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get isRunning(): boolean {
     return GetIsVehicleEngineRunning(this.handle);

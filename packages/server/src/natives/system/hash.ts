@@ -1,4 +1,4 @@
-export abstract class Password {
+export abstract class Hash {
   public generate(password: string): string {
     return GetPasswordHash(password);
   }

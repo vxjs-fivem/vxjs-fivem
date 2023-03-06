@@ -1,4 +1,4 @@
-import { IApplicationBuilder, IDynamicModule, ProviderType, TypeOf } from '@vxjs-fivem/core';
+import { IApplicationBuilder, IDynamicModule, ProviderType } from '@vxjs-fivem/core';
 import { ChatCommandBinder, NetEventBinder, RemoteRequestBinder } from './binders';
 import { EXCEPTION_BOUNDARY, EXCEPTION_FILTER, GUARD_PROVIDER } from './core';
 import { ExceptionBoundary } from './flow/exceptions/exception.boundary';

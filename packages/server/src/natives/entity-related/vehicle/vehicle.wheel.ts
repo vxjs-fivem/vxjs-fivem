@@ -3,7 +3,7 @@ import { RGB } from '../../utils';
 
 export class VehicleWheel extends VehiclePart {
   public get smokeColor(): RGB {
-    const [r, g, b] = GetVehicleTyreSmokeColor(this.handle);
+    const [ r, g, b ] = GetVehicleTyreSmokeColor(this.handle);
     return { r, g, b };
   }
 

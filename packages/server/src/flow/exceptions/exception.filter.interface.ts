@@ -5,11 +5,11 @@ export interface IExceptionFilter<TError extends Error> {
   catch(context: NetContext, error: TError): void;
 }
 
-const Catches =
+export const Catches =
   <TError extends Error>(error: TypeOf<TError>): ClassDecorator =>
-  (target: unknown) => {
-    const errorType = Reflector.getClass(error);
-    const targetType = Reflector.getClass(target);
+    (target: unknown) => {
+      const errorType = Reflector.getClass(error);
+      const targetType = Reflector.getClass(target);
 
-    Reflect.defineMetadata('CATCHES', errorType, target);
-  };
+      Reflect.defineMetadata('CATCHES', errorType, targetType);
+    };

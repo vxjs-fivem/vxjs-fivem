@@ -16,7 +16,7 @@ import { VehicleWindow } from '../entity-related/vehicle/vehicle.window';
 import { VehicleAlarm } from '../entity-related/vehicle/vehicle.alarm';
 
 export class Vehicle extends Entity {
-  constructor(handle: number) {
+  public constructor(handle: number) {
     super(handle);
   }
 

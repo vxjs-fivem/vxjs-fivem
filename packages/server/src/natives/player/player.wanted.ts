@@ -1,7 +1,7 @@
 import { Vector3 } from '../utils/vector3';
 
 export class PlayerWanted {
-  constructor(private source: string) {}
+  public constructor(private source: string) {}
 
   public clear(): void {
     ClearPlayerWantedLevel(this.source);
@@ -28,7 +28,7 @@ export class PlayerWanted {
   }
 
   public get centrePosition(): Vector3 {
-    const [x, y, z] = GetPlayerWantedCentrePosition(this.source);
+    const [ x, y, z ] = GetPlayerWantedCentrePosition(this.source);
     return new Vector3(x, y, z);
   }
 

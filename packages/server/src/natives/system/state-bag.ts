@@ -1,5 +1,5 @@
 export class StateBag {
-  constructor(public readonly name: string) {}
+  public constructor(public readonly name: string) {}
 
   public get<T = unknown>(key: string): T {
     return GetStateBagValue(this.name, key);

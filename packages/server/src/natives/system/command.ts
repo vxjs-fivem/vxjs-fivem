@@ -1,5 +1,5 @@
 export class Command {
-  constructor(public readonly name: string) {}
+  public constructor(public readonly name: string) {}
 
   public execute(): void {
     ExecuteCommand(this.name);

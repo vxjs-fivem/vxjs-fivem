@@ -1,5 +1,5 @@
 export class Model {
-  constructor(public readonly model: string, private _hash: number) {}
+  public constructor(public readonly model: string, private _hash: number) {}
 
   public get hash(): number {
     if (!this._hash) {

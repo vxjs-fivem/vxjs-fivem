@@ -2,7 +2,7 @@ import { VehicleLockOnState } from '../../enums';
 import { Vehicle } from '../../entity';
 
 export class VehicleWeapon {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get lockOnState(): VehicleLockOnState {
     return GetVehicleHomingLockonState(this.handle);

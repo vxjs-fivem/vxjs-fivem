@@ -4,6 +4,6 @@ import { GuardHelper } from './guard.helper';
 
 export const UseGuards =
   (...guards: ProviderType<IGuard>[]): ClassDecorator & MethodDecorator =>
-  (target: unknown, methodName?: string) => {
-    GuardHelper.set(target, guards, methodName);
-  };
+    (target: unknown, methodName?: string) => {
+      GuardHelper.set(target, guards, methodName);
+    };

@@ -1,5 +1,5 @@
 export class PlayerState {
-  constructor(private readonly source: string) {}
+  public constructor(private readonly source: string) {}
 
   public get maxArmour(): number {
     return GetPlayerMaxArmour(this.source);

@@ -1,14 +1,14 @@
 import { RGB } from '../../utils/rgb';
 
 class SecondaryColour {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get isCustom(): boolean {
     return GetIsVehiclePrimaryColourCustom(this.handle);
   }
 
   public get custom(): RGB {
-    const [r, g, b] = GetVehicleCustomSecondaryColour(this.handle);
+    const [ r, g, b ] = GetVehicleCustomSecondaryColour(this.handle);
     return { r, g, b };
   }
 
@@ -18,14 +18,14 @@ class SecondaryColour {
 }
 
 class PrimaryColor {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get isCustom(): boolean {
     return GetIsVehiclePrimaryColourCustom(this.handle);
   }
 
   public get custom(): RGB {
-    const [r, g, b] = GetVehicleCustomPrimaryColour(this.handle);
+    const [ r, g, b ] = GetVehicleCustomPrimaryColour(this.handle);
     return { r, g, b };
   }
 
@@ -35,7 +35,7 @@ class PrimaryColor {
 }
 
 class DashboardColor {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get(): number {
     return GetVehicleDashboardColour(this.handle);
@@ -43,7 +43,7 @@ class DashboardColor {
 }
 
 export class VehicleColour {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get(): [number, number] {
     return GetVehicleColours(this.handle);

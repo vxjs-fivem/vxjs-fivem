@@ -1,5 +1,5 @@
 export class Train {
-  constructor(public readonly handle: number) {}
+  public constructor(public readonly handle: number) {}
 
   public get carriageEngine(): number {
     return GetTrainCarriageEngine(this.handle);

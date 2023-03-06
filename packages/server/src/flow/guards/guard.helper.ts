@@ -14,6 +14,6 @@ export abstract class GuardHelper {
     if (method) {
       guards.push(...(Reflect.getMetadata(this._key, type, method) ?? []));
     }
-    return [...new Set(guards)];
+    return [ ...new Set(guards) ];
   }
 }

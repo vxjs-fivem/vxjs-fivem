@@ -10,7 +10,8 @@
   "scripts": {
     "core": "yarn workspace @vxjs-fivem/core",
     "client": "yarn workspace @vxjs-fivem/client",
-    "server": "yarn workspace @vxjs-fivem/server"
+    "server": "yarn workspace @vxjs-fivem/server",
+    "lint:fix": "eslint"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",

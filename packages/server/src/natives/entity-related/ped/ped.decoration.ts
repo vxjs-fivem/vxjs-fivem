@@ -1,5 +1,5 @@
 export class PedDecoration {
-  constructor(private handle: number) {}
+  public constructor(private handle: number) {}
 
   public addDecorationFromHashes(
     collection: string | number,

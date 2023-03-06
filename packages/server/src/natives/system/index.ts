@@ -8,7 +8,7 @@ export * from './host';
 export * from './kvp';
 export * from './map';
 export * from './mumble';
-export * from './password';
+export * from './hash';
 export * from './profiler';
 export * from './resource';
 export * from './routing-bucket';

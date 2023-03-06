@@ -2,7 +2,7 @@ import { VehiclePart } from './vehicle.part';
 import { VehicleDoorsLockStatus } from '../../enums';
 
 class VehicleDoor extends VehiclePart {
-  constructor(handle: number, private readonly index: number) {
+  public constructor(handle: number, private readonly index: number) {
     super(handle);
   }
 

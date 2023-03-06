@@ -2,7 +2,7 @@ import { PedClothing } from './ped.clothing';
 import { PedDecoration } from './ped.decoration';
 
 export class PedAppearance {
-  constructor(private readonly handle: number) {}
+  public constructor(private readonly handle: number) {}
 
   public get clothing(): PedClothing {
     return new PedClothing(this.handle);

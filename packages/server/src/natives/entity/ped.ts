@@ -6,7 +6,7 @@ import { PedRagdoll } from '../entity-related/ped/ped.ragdoll';
 import { VehicleSeat } from '../enums';
 
 export class Ped extends Entity {
-  constructor(handle: number) {
+  public constructor(handle: number) {
     super(handle);
   }
 

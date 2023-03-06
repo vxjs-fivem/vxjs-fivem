@@ -1,7 +1,7 @@
 import { Entity } from './';
 
 export class Prop extends Entity {
-  constructor(handle: number) {
+  public constructor(handle: number) {
     super(handle);
   }
 
