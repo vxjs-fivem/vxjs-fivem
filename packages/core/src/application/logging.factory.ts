@@ -1,38 +1,87 @@
 import { IConfigService, ILogger, ILoggingFactory } from '../core';
-import { IServiceProvider, TypeOf } from '../types';
+import { IServiceProvider, TypeOf, ValueOf } from '../types';
 import * as console from 'console';
+
+interface Colors  {
+  Orange:  string;
+  Green:  string;
+  Yellow:  string;
+  Blue:  string;
+  LightBlue:  string;
+  Purple:  string;
+  Reset:  string;
+  Red:  string;
+}
+
+const ClientColors = {
+  Orange: '^1',
+  Green: '^2',
+  Yellow: '^3',
+  Blue: '^4',
+  LightBlue: '^5',
+  Purple: '^6',
+  Reset: '^7',
+  Red: '^9'
+};
+
+const ServerColors = {
+  Orange: '\x1b[33m',
+  Green: '\x1b[32m',
+  Yellow: '\x1b[93m',
+  Blue: '\x1b[33m',
+  LightBlue: '\x1b[94m',
+  Purple: '\x1b[35m',
+  Reset: '\x1b[0m',
+  Red: '\x1b[31m',
+};
 
 class Logger implements ILogger {
   private readonly _context: string;
-  public constructor(context: string) {
+  private readonly _colors: Colors;
+
+  public constructor(context: string, colors: Colors) {
     this._context = context;
+    this._colors = colors;
   }
 
   public debug(message: string): void {
-    console.log(`[DEBUG] ${message}`);
+    this.write(this._colors.LightBlue, 'DEBUG', message);
   }
 
   public error(error: Error, message?: string): void {
     if (message) {
-      console.error(message, error);
-    } else {
-      console.error(error);
+      this.write(this._colors.Red, 'ERROR', message);
     }
+    this.write(this._colors.Red, 'ERROR', error.toString());
   }
 
   public info(message: string): void {
-    console.log(`[INFO] ${message}`);
+    this.write(this._colors.Blue, ' INFO', message);
   }
 
   public log(message: string): void {
-    console.log(`[LOG] ${message}`);
+    this.write(this._colors.Green, '  LOG', message);
+  }
+
+  private write(color: ValueOf<Colors>, prefix: string, message: string): void {
+    const ts = new Date().toLocaleString('uk')
+      .replaceAll('.', '-');
+
+    console.log(color + `[${prefix}] [${ts}] - ${message}` + this._colors.Reset);
+
   }
 }
 
 export class LoggingFactory implements ILoggingFactory {
-  private readonly config: IConfigService;
+  private readonly _colors: Colors;
+
+  public constructor(config: IConfigService) {
+    const side = config.getOrThrow<'CLIENT' | 'SERVER'>('side');
+    this._colors = side === 'CLIENT' ? ClientColors : ServerColors;
+  }
+
   public createLogger(provider: IServiceProvider, parent: TypeOf<unknown>): ILogger {
     const name = parent?.name ?? '[APPLICATION]';
-    return new Logger(name);
+    return new Logger(name, this._colors);
   }
 }
