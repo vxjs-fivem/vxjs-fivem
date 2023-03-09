@@ -80,6 +80,8 @@ export class ApplicationBuilder implements IApplicationBuilder {
     const configFileName = `vx.config.${this.side.toLowerCase()}.json`;
     this.resourceName = GetCurrentResourceName();
     const content = JSON.parse(LoadResourceFile(this.resourceName, configFileName) ?? null) ?? {};
+    content.resourceName = this.resourceName;
+    content.side = this.side;
     this.config = new ConfigService(content);
     this.services.add<IConfigService>(CONFIG_SERVICE, this.config);
     this.platformProvider = platformProvider;
@@ -130,13 +132,13 @@ export class ApplicationBuilder implements IApplicationBuilder {
   }
 
   public build(): IApplication {
-    const [dynamicModules, asyncModules] = this.getModules();
+    const [ dynamicModules, asyncModules ] = this.getModules();
 
     dynamicModules.forEach((x) => {
       x.load(this);
     });
 
-    this._loggingFactory ??= new LoggingFactory();
+    this._loggingFactory ??= new LoggingFactory(this.config);
     this.services.addFactory<ILogger>(LOGGER, (provider, target) => {
       return this._loggingFactory.createLogger(provider, target);
     });
@@ -170,6 +172,6 @@ export class ApplicationBuilder implements IApplicationBuilder {
       }
     });
 
-    return [dynamicModules, asyncModules];
+    return [ dynamicModules, asyncModules ];
   }
 }

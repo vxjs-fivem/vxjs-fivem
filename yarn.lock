@@ -299,6 +299,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@citizenfx/client@^2.0.6302-1":
+  version "2.0.6302-1"
+  resolved "https://registry.yarnpkg.com/@citizenfx/client/-/client-2.0.6302-1.tgz#714a31fbb3f51916c2936e36b17f2feb375e235a"
+  integrity sha512-SnyfHlagSNOr4NnJAwOdt5CsvH6tbqJg0Q4szTKV7GyEm13rlbDtI60uesFR1YdEobVi8QCXbjAfUWFM+/Hp5A==
+
 "@citizenfx/server@^2.0.6302-1":
   version "2.0.6302-1"
   resolved "https://registry.yarnpkg.com/@citizenfx/server/-/server-2.0.6302-1.tgz#a091e967cc620ce0c0fbe27c15f771a49949ca5c"
@@ -863,6 +868,16 @@
     lodash.get "^4.4.2"
     reflect-metadata "^0.1.13"
 
+"@vxjs-fivem/core@1.0.0-beta-9":
+  version "1.0.0-beta-9"
+  resolved "https://registry.yarnpkg.com/@vxjs-fivem/core/-/core-1.0.0-beta-9.tgz#159f0c06a8f06c9586119d8fc0e7b9e421c7e437"
+  integrity sha512-raNK2vYxEPpRvLjLiedOl9OtHg/XTZc5mtx1o20q9dTFxfBizdOvlEEIAY9L3SyIHzeCNdsc4gwtNym0xc2NVQ==
+  dependencies:
+    eventemitter2 "^6.4.9"
+    inversify "^6.0.1"
+    lodash.get "^4.4.2"
+    reflect-metadata "^0.1.13"
+
 acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"
@@ -1405,11 +1420,6 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-config-prettier@^8.6.0:
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.6.0.tgz#dec1d29ab728f4fa63061774e1672ac4e363d207"
-  integrity sha512-bAF0eLpLVqP5oEVUFKpMA+NnRFICwn9X8B5jrR9FcqnYBuPbqWEjTEspPWMj5ye6czoSLDweCzSo3Ko7gGrZaA==
-
 eslint-import-resolver-node@^0.3.7:
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.7.tgz#83b375187d412324a1963d84fa664377a23eb4d7"
@@ -1567,6 +1577,11 @@ esutils@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
+
+eventemitter2@^6.4.9:
+  version "6.4.9"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.9.tgz#41f2750781b4230ed58827bc119d293471ecb125"
+  integrity sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==
 
 execa@^5.0.0:
   version "5.1.1"
@@ -2866,11 +2881,6 @@ prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
-
-prettier@^2.8.4:
-  version "2.8.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.4.tgz#34dd2595629bfbb79d344ac4a91ff948694463c3"
-  integrity sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==
 
 pretty-format@^29.0.0, pretty-format@^29.4.3:
   version "29.4.3"

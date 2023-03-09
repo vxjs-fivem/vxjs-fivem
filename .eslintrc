@@ -6,7 +6,6 @@
   "extends": [
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
     "plugin:import/errors"
   ],
   "settings": {
@@ -39,6 +38,15 @@
     ],
     "@typescript-eslint/no-duplicate-imports": "error",
     "import/no-duplicates": "error",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "max-len": ["error", { "code": 120 }],
+    "quotes": ["error", "single"],
+    "indent": ["error", 2],
+    "semi": ["error", "always"],
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "key-spacing": ["error", { "beforeColon": false }],
+    "object-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "always"]
   }
 }

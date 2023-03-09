@@ -1,7 +1,6 @@
 import {
   ApplicationBuilder,
   Controller,
-  Fn,
   IApplicationBuilder,
   IAsyncModule,
   IBinder,

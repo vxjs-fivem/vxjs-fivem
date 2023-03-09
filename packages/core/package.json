@@ -1,6 +1,6 @@
 {
   "name": "@vxjs-fivem/core",
-  "version": "1.0.0-beta-5",
+  "version": "1.0.0-beta-17",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -13,7 +13,8 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "prepublishOnly": "yarn build",
-    "npm:publish": "npm publish --access public"
+    "npm:publish": "npm publish --access public",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "eventemitter2": "^6.4.9",
