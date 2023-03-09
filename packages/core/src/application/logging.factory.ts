@@ -1,6 +1,5 @@
 import { IConfigService, ILogger, ILoggingFactory } from '../core';
-import { IServiceProvider, TypeOf, ValueOf } from '../types';
-import * as console from 'console';
+import { IServiceProvider, TypeOf } from '../types';
 
 interface Colors  {
   Orange:  string;
@@ -28,7 +27,7 @@ const ServerColors = {
   Orange: '\x1b[33m',
   Green: '\x1b[32m',
   Yellow: '\x1b[93m',
-  Blue: '\x1b[33m',
+  Blue: '\x1b[34m',
   LightBlue: '\x1b[94m',
   Purple: '\x1b[35m',
   Reset: '\x1b[0m',
@@ -52,18 +51,19 @@ class Logger implements ILogger {
     if (message) {
       this.write(this._colors.Red, 'ERROR', message);
     }
-    this.write(this._colors.Red, 'ERROR', error.toString());
+    this.write(this._colors.Red, 'ERROR', error.message);
+    this.write(this._colors.Red, 'ERROR', error.stack);
   }
 
   public info(message: string): void {
-    this.write(this._colors.Blue, ' INFO', message);
+    this.write(this._colors.Green, ' INFO', message);
   }
 
   public log(message: string): void {
-    this.write(this._colors.Green, '  LOG', message);
+    this.write(this._colors.Blue, '  LOG', message);
   }
 
-  private write(color: ValueOf<Colors>, prefix: string, message: string): void {
+  private write(color: string, prefix: string, message: string): void {
     const ts = new Date().toLocaleString('uk')
       .replaceAll('.', '-');
 
