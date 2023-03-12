@@ -16,6 +16,21 @@
     lodash.get "^4.4.2"
     reflect-metadata "^0.1.13"
 
+"@vxproject/core@^0.0.0-beta.10":
+  version "0.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@vxproject/core/-/core-0.0.0-beta.10.tgz#0d686769a51f8481a5ca8476f416ae567589c818"
+  integrity sha512-vlrfMJsynADOrfibvBpcfoSde9ckyrGWgr3EKi8FwpHfQbtYpBIaWmKBSoP9K/7+d1hop73qfK1u2vV+ajSyBQ==
+  dependencies:
+    eventemitter2 "^6.4.9"
+    inversify "^6.0.1"
+    lodash.get "^4.4.2"
+    reflect-metadata "^0.1.13"
+
+eventemitter2@^6.4.9:
+  version "6.4.9"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-6.4.9.tgz#41f2750781b4230ed58827bc119d293471ecb125"
+  integrity sha512-JEPTiaOt9f04oa6NOkc4aH+nVp5I3wEjpHbIPqfgCdD5v5bUzy7xQqwcVO2aDQgOWhI28da57HksMrzK9HlRxg==
+
 inversify@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/inversify/-/inversify-6.0.1.tgz#b20d35425d5d8c5cd156120237aad0008d969f02"

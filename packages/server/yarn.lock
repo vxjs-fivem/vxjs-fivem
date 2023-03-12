@@ -7,14 +7,21 @@
   resolved "https://registry.yarnpkg.com/@citizenfx/server/-/server-2.0.6302-1.tgz#a091e967cc620ce0c0fbe27c15f771a49949ca5c"
   integrity sha512-0A+kfaX6K8mXT9f1HWPS6Q4G5Xs/6BSQjK8wnW3RmtnfAfPqX+HNciKIbyH2boP0dlXFOsSPGEyRTbIC8CRoQA==
 
-"@vxjs-fivem/core@1.0.0-beta-13":
-  version "1.0.0-beta-13"
-  resolved "https://registry.yarnpkg.com/@vxjs-fivem/core/-/core-1.0.0-beta-13.tgz#9de879155646210933e002d63d00cf0e0b998d3a"
-  integrity sha512-DIW0qQ9TOE9aKSjw3b9TBEjFBLQjAtxGua2wRHmuy4gR97giyKnCFGHQzOVHdoDo/rfiFnd7IxY4JImnIOsiGQ==
+"@vxproject/core@^0.0.0-beta.0":
+  version "0.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@vxproject/core/-/core-0.0.0-beta.0.tgz#b47802b42612dc56f0b0c40b1b6489d86b32cfe5"
+  integrity sha512-gvxJM+UCr/xTm54JoQ6EXP0keGv9kmCmjz4lXboupDwu45VpK/oi6f494AjRAKDoFeDHYo5Z6id2PZTsiyjH7w==
   dependencies:
     eventemitter2 "^6.4.9"
     inversify "^6.0.1"
     lodash.get "^4.4.2"
+    reflect-metadata "^0.1.13"
+
+"@vxproject/natives.server@^0.0.0-beta-9":
+  version "0.0.0-beta-9"
+  resolved "https://registry.yarnpkg.com/@vxproject/natives.server/-/natives.server-0.0.0-beta-9.tgz#ce871b689adc08c3517b2e0528df961bd72d54ef"
+  integrity sha512-scoZpGZxdYq1RYrs2ZVxXZfnJ/6Gq/twu9YWV0+FA8MfQ5sDZA0qQzPrPg+YuwHHp5yrj2fkW0Diy1DxyLdMAw==
+  dependencies:
     reflect-metadata "^0.1.13"
 
 eventemitter2@^6.4.9:

@@ -1,0 +1,24 @@
+{
+  "name": "@vxproject/natives.client",
+  "version": "0.0.0-beta-1",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "url": "https://github.com/vxjs-fivem/vxjs-fivem"
+  },
+  "author": {
+    "name": "ivanzaida"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "yarn build",
+    "npm:publish": "npm publish --access public"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@citizenfx/server": "^2.0.6302-1"
+  }
+}

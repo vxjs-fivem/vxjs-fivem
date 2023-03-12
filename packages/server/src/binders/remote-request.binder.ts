@@ -11,10 +11,9 @@ import {
   Reflector,
   RemoteRequest,
   RpcCodes,
+  IGuard, IExceptionBoundary, NetContext, GUARD_PROVIDER, EXCEPTION_BOUNDARY
 } from '@vxjs-fivem/core';
 import { BaseGuardedBinder } from './base.guarded-binder';
-import { IGuard, IExceptionBoundary, NetContext, NetContextKind } from '../flow';
-import { EXCEPTION_BOUNDARY, GUARD_PROVIDER } from '../core';
 import { Player } from '../natives';
 
 type RpcReqHandler = (id: string | number, resource: string, handlerName: string, payload: unknown[]) => unknown;
@@ -75,11 +74,11 @@ export class RemoteRequestBinder extends BaseGuardedBinder {
     return (player, payload) => {
       const context = Object.assign(new NetContext(), {
         eventName,
-        kind: NetContextKind.RemoteRequest,
+        kind: 'remote request',
         args: payload,
         player,
         target: target,
-        methodName: methodName,
+        methodName: methodName
       });
       return handler(context);
     };

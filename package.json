@@ -8,9 +8,9 @@
     "./packages/*"
   ],
   "scripts": {
-    "core": "yarn workspace @vxjs-fivem/core",
-    "client": "yarn workspace @vxjs-fivem/client",
-    "server": "yarn workspace @vxjs-fivem/server",
+    "core": "yarn workspace @vxproject/core",
+    "client": "yarn workspace @vxproject/client",
+    "server": "yarn workspace @vxproject/server",
     "lint:fix": "eslint"
   },
   "devDependencies": {

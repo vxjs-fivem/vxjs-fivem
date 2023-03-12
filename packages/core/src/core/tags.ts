@@ -1,4 +1,13 @@
-export const CONFIG_SERVICE = 'CONFIG_SERVICE';
-export const LOGGER = 'VX_LOGGER';
-export const PLATFORM_PROVIDER = 'PLATFORM_PROVIDER';
-export const RESOURCE_EVENT_PROVIDER = 'RESOURCE_EVENT_PROVIDER';
+export const CONFIG = Symbol('CONFIG_SERVICE');
+export const EXPORT = Symbol('CONFIG_SERVICE');
+export const LOGGER = Symbol('VX_LOGGER');
+export const PLATFORM_PROVIDER = Symbol('PLATFORM_PROVIDER');
+export const RESOURCE_EVENT_PROVIDER = Symbol('RESOURCE_EVENT_PROVIDER');
+export const EXCEPTION_HANDLER = Symbol('EXCEPTION_HANDLER');
+export const CONTROLLER = Symbol('CONTROLLER');
+export const BINDER = Symbol('BINDER');
+export const REQUEST_FILTER = Symbol('REQUEST_FILTER');
+export const GLOBAL_REQUEST_FILTER = Symbol('GLOBAL_REQUEST_FILTER');
+export const RESPONSE_FILTER = Symbol('RESPONSE_FILTER');
+export const GLOBAL_RESPONSE_FILTER = Symbol('GLOBAL_RESPONSE_FILTER');
+export const GUARD = Symbol('GUARD');

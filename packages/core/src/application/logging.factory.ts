@@ -1,15 +1,14 @@
-import { IConfigService, ILogger, ILoggingFactory } from '../core';
-import { IServiceProvider, TypeOf } from '../types';
+import { ILogger } from '../core';
 
-interface Colors  {
-  Orange:  string;
-  Green:  string;
-  Yellow:  string;
-  Blue:  string;
-  LightBlue:  string;
-  Purple:  string;
-  Reset:  string;
-  Red:  string;
+interface Colors {
+  Orange: string;
+  Green: string;
+  Yellow: string;
+  Blue: string;
+  LightBlue: string;
+  Purple: string;
+  Reset: string;
+  Red: string;
 }
 
 const ClientColors = {
@@ -31,16 +30,21 @@ const ServerColors = {
   LightBlue: '\x1b[94m',
   Purple: '\x1b[35m',
   Reset: '\x1b[0m',
-  Red: '\x1b[31m',
+  Red: '\x1b[31m'
 };
 
-class Logger implements ILogger {
+const noop = (): void => null;
+
+export class ConsoleLogger implements ILogger {
   private readonly _context: string;
   private readonly _colors: Colors;
 
-  public constructor(context: string, colors: Colors) {
+  public constructor(context: string, side: 'server' | 'client', isDebug: boolean) {
     this._context = context;
-    this._colors = colors;
+    this._colors = side === 'client' ? ClientColors : ServerColors;
+    if (!isDebug) {
+      this.debug = noop;
+    }
   }
 
   public debug(message: string): void {
@@ -72,16 +76,3 @@ class Logger implements ILogger {
   }
 }
 
-export class LoggingFactory implements ILoggingFactory {
-  private readonly _colors: Colors;
-
-  public constructor(config: IConfigService) {
-    const side = config.getOrThrow<'CLIENT' | 'SERVER'>('side');
-    this._colors = side === 'CLIENT' ? ClientColors : ServerColors;
-  }
-
-  public createLogger(provider: IServiceProvider, parent: TypeOf<unknown>): ILogger {
-    const name = parent?.name ?? '[APPLICATION]';
-    return new Logger(name, this._colors);
-  }
-}

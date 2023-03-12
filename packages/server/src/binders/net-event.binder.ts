@@ -1,12 +1,21 @@
-import { Inject, InjectMany, IPlatformProvider, NetEvent, Optional, PLATFORM_PROVIDER } from '@vxjs-fivem/core';
+import {
+  Inject,
+  InjectMany,
+  IPlatformProvider,
+  NetEvent,
+  Optional,
+  PLATFORM_PROVIDER,
+  IGuard,
+  IExceptionBoundary,
+  NetContext, GUARD_PROVIDER, EXCEPTION_BOUNDARY
+} from '@vxjs-fivem/core';
 import { BaseGuardedBinder } from './base.guarded-binder';
-import { IGuard, IExceptionBoundary, NetContext, NetContextKind } from '../flow';
-import { EXCEPTION_BOUNDARY, GUARD_PROVIDER } from '../core';
 import { Player } from '../natives';
 
 export class NetEventBinder extends BaseGuardedBinder {
   @Inject(PLATFORM_PROVIDER)
   private readonly provider: IPlatformProvider;
+
   public constructor(
     @Optional() @InjectMany(GUARD_PROVIDER) guards: IGuard[] = [],
     @Inject(EXCEPTION_BOUNDARY) handler: IExceptionBoundary
@@ -21,11 +30,11 @@ export class NetEventBinder extends BaseGuardedBinder {
       this.provider.onNetEvent(name, (...args) => {
         const context = Object.assign(new NetContext(), {
           eventName: name,
-          kind: NetContextKind.NetEvent,
+          kind: 'net event',
           args: args,
           player: new Player(global.source),
           target: controller,
-          methodName: method,
+          methodName: method
         });
         return handler(context);
       });

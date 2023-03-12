@@ -1,4 +1,4 @@
-import { Factory, ProviderType, TypeOf } from './common';
+import { Factory, FactoryMetadata, ProviderType, TypeOf } from './common';
 
 export type ContainerKeyType = string | symbol | TypeOf<unknown>;
 
@@ -11,7 +11,7 @@ export interface IServiceCollection {
 }
 
 export interface IServiceProvider {
-  get<T>(key: ContainerKeyType): T;
+  get<T>(key: ContainerKeyType, metadata?: FactoryMetadata): T;
   getAll<T>(key: ContainerKeyType): T[];
   has(key: ContainerKeyType): boolean;
 }

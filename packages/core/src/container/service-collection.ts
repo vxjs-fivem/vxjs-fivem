@@ -49,8 +49,17 @@ export class ServiceCollection implements IServiceCollection {
     this._container
       .bind(key as never)
       .toDynamicValue((ctx) => {
-        const target = ctx.currentRequest.parentRequest?.bindings[0].implementationType;
-        return factory(this._provider, target as TypeOf<unknown>);
+        const target = ctx.currentRequest.parentRequest?.bindings[0]?.implementationType as TypeOf<unknown>;
+        const property = ctx.currentRequest.target?.identifier as string;
+        const metadata = ctx.currentRequest.target?.metadata.filter(x => x.key !== 'inject').reduce((acc, curr) => {
+          acc[curr.key as string] = curr.value;
+          return acc;
+        }, {}) as unknown as Record<string, unknown>;
+        return factory(this._provider, {
+          target,
+          property: property,
+          metadata
+        });
       })
       .inRequestScope();
     return this;

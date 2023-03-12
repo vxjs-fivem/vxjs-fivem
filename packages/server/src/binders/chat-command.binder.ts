@@ -1,38 +1,51 @@
-import { ChatCommand, Inject, InjectMany, IPlatformProvider, Optional, PLATFORM_PROVIDER } from '@vxjs-fivem/core';
-import { BaseGuardedBinder } from './base.guarded-binder';
-import { IGuard, NetContext, NetContextKind, IExceptionBoundary } from '../flow';
-import { EXCEPTION_BOUNDARY, GUARD_PROVIDER } from '../core';
-import { Player } from '../natives';
+import {
+  ChatCommand,
+  Inject, InjectMany,
+  IPlatformProvider, IRequestFilter, IResponseFilter, Optional,
+  PLATFORM_PROVIDER,
+  PlayerRequest,
+  Reflector,
+  REQUEST_FILTER, RESPONSE_FILTER
+} from '@vxproject/core';
+import { Player } from '@vxproject/natives.server';
+import { HandlerBuilder } from '@vxproject/core/dist/flow/handler-builder';
 
-export class ChatCommandBinder extends BaseGuardedBinder {
+export class ChatCommandBinder {
   @Inject(PLATFORM_PROVIDER)
   private readonly provider: IPlatformProvider;
-  public constructor(
-    @Optional() @InjectMany(GUARD_PROVIDER) guards: IGuard[] = [],
-    @Inject(EXCEPTION_BOUNDARY) handler: IExceptionBoundary
-  ) {
-    super(guards, handler);
-  }
+
+  @Optional()
+  @InjectMany(REQUEST_FILTER)
+  private readonly _requestFilters: IRequestFilter[] = [];
+
+  @Optional()
+  @InjectMany(RESPONSE_FILTER)
+  private readonly _responseFilters: IResponseFilter[] = [];
 
   public bind(controller: unknown): void {
     const metadata = ChatCommand.getMetadata(controller);
     metadata.forEach(({ method, value: { name, isRestricted } }) => {
-      const handler = this.createWrapper(controller, method);
-      this.provider.onChatCommand(
-        name,
-        (src: number, args: string[]) => {
-          const context = Object.assign(new NetContext(), {
-            eventName: name,
-            kind: NetContextKind.ChatCommand,
-            args: args,
-            player: src === 0 ? null : new Player(src),
-            target: controller,
-            methodName: method,
-          });
-          return handler(context);
-        },
-        isRestricted
-      );
+      const handler = new HandlerBuilder(Reflector.bindMethod(controller, method))
+        .mapRequestFilters(this._requestFilters)
+        .mapResponseFilters(this._responseFilters)
+        .build();
+
+      const commandHandler = (src: number, args: string[]): Promise<unknown> => {
+        const request: PlayerRequest = {
+          name: name,
+          kind: 'chat command',
+          passedArguments: args,
+          finalArguments: args,
+          metadata: {
+            player: src === 0 ? null : new Player(src)
+          },
+          resource: controller,
+          methodName: method
+        };
+        return handler(request);
+      };
+
+      this.provider.onChatCommand(name, commandHandler, isRestricted);
     });
   }
 }

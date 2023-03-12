@@ -4,8 +4,13 @@ export class Reflector {
   private static _metadataBackingFiled = 'METADATA_BACKING_FIELD';
   private static _boundMethodsMetadataKey = 'BOUND_METHODS';
   private static _customMetadataKey = 'CUSTOM_METADATA';
+
   public static getClass<T>(target: ProviderType<T>): TypeOf<T> {
     return (typeof target === 'function' ? target : target.constructor) as TypeOf<T>;
+  }
+
+  public static getPrototype<T>(target: ProviderType<T>): {[p: string | number | symbol]: never} {
+    return this.getClass(target).prototype;
   }
 
   public static bindMethod<TTarget>(target: TTarget, method: string): Fn {

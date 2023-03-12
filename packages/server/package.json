@@ -1,6 +1,6 @@
 {
-  "name": "@vxjs-fivem/server",
-  "version": "0.0.0-beta-8",
+  "name": "@vxproject/server",
+  "version": "0.0.0-beta-9",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,7 +16,8 @@
     "npm:publish": "npm publish --access public"
   },
   "dependencies": {
-    "@vxjs-fivem/core": "1.0.0-beta-13",
+    "@vxproject/core": "^0.0.0-beta.0",
+    "@vxproject/natives.server": "^0.0.0-beta-9",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
